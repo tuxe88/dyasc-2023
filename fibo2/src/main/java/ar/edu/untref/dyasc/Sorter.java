@@ -7,15 +7,12 @@ import java.util.List;
 
 public class Sorter {
 
-    public List<Integer> sort(List<Integer> list, char direccion){
-
-        if(direccion=='i'){
-            List<Integer> copy = new ArrayList<>(list);
-            copy.sort(Collections.reverseOrder());
-            return copy;
+    public void order(char order, List<String> fiboList) {
+        if(order =='d'){
+            //por defecto esta ordenada
+        }else{
+            Collections.reverse(fiboList);
         }
-
-        return  list;
     }
 
 }

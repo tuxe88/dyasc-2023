@@ -6,12 +6,14 @@ import java.util.List;
 
 public class Fibo {
 
-    Parser parser = new Parser();
-    Printer printer = new Printer();
-    Sorter sorter = new Sorter();
+    Validator validator;
+    Parser parser;
+    Printer printer;
+    Sorter sorter;
     String[] input;
 
-    public Fibo(Parser parser, Printer printer, Sorter sorter, String[] args){
+    public Fibo(Validator validator,Parser parser, Printer printer, Sorter sorter, String[] args){
+        this.validator = validator;
         this.parser = parser;
         this.printer = printer;
         this.sorter = sorter;
@@ -19,73 +21,27 @@ public class Fibo {
     }
 
     public void execute(){
-        List<String> fiboList = new LinkedList();
-        int fibo = 0;
-        char order = '0';
-        char orientation = '0';
 
-        if(this.input.length==0){
+        //valido el input
+        if(!validator.isInputValid(this.input)){
             System.out.println("Opciones no validas");
             return;
-        } else if (this.input.length == 1) {
-            try{
-                fibo = Integer.parseInt(this.input[0]);
-            }catch (Exception e){
-                System.out.println("Opciones no validas");
-                return;
-            }
-        }else if (this.input.length == 2) {
-            String options = this.input[0];
-            fibo = Integer.parseInt(this.input[1]);
-            order = options.charAt(4);
-            orientation = options.charAt(3);
-            if(order!='i' && order!='d' || orientation!='v' && orientation!='h'){
-                System.out.println("Opciones no validas");
-                return;
-            }
         }
 
-        fillFiboList(fibo, fiboList);
-        order(order, fiboList);
-        print(orientation, fibo, fiboList);
+        //con el parser obtengo los parametros necesarios
+        int fibo = parser.getFiboNumber(this.input);
+        List<String> fiboList = parser.getFiboList(fibo);
+        char order = parser.getOrder(this.input);
+        char orientation = parser.getOrientation(this.input);
+
+        //con el sorter ordeno la lista dependiendo de lo que me pidan
+        sorter.order(order, fiboList);
+
+        //con el printer imprimo
+        printer.print(orientation, fibo, fiboList);
 
     }
 
-    private static void fillFiboList(int fibo, List<String> fiboList) {
-        int primero = 0;
-        int segundo = 1;
-
-        for (int i = 1; i <= fibo; ++i) {
-
-            fiboList.add(String.valueOf(primero));
-            int siguiente = primero + segundo;
-            primero = segundo;
-            segundo = siguiente;
-        }
-
-    }
-
-    private static void order(char order, List<String> fiboList) {
-        if(order =='d'){
-            //por defecto esta ordenada
-        }else{
-            Collections.reverse(fiboList);
-        }
-    }
-
-    private static void print(char orientation, int fibo, List<String> fiboList) {
-        if(orientation =='h'){
-            System.out.print("fibo<"+ fibo +">: ");
-            for (int i = 0; i < fiboList.size(); ++i) {
-                System.out.print(fiboList.get(i) + " ");
-            }
-        }else{
-            System.out.print("fibo<"+ fibo +">: \n");
-            for (int i = 0; i < fiboList.size(); ++i) {
-                System.out.println(fiboList.get(i));
-            }
-        }
-    }
 }
 
 

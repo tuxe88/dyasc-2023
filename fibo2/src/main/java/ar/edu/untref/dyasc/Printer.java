@@ -4,14 +4,16 @@ import java.util.List;
 
 public class Printer {
 
-    public void print(List<Integer> list,char orientation){
-        if(orientation=='v'){
-            for (int i: list){
-                System.out.println(i);
+    public void print(char orientation, int fibo, List<String> fiboList) {
+        if(orientation =='h'){
+            System.out.print("fibo<"+ fibo +">: ");
+            for (int i = 0; i < fiboList.size(); ++i) {
+                System.out.print(fiboList.get(i) + " ");
             }
-        }if(orientation=='h'){
-            for (int i: list){
-                System.out.print(i+" ");
+        }else{
+            System.out.print("fibo<"+ fibo +">: \n");
+            for (int i = 0; i < fiboList.size(); ++i) {
+                System.out.println(fiboList.get(i));
             }
         }
     }
