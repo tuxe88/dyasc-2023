@@ -22,7 +22,7 @@ public class ParserTest {
     public void getOrder(){
         Parser p = new Parser();
         String[] args = {"-o=vd","2"};
-        assertThat(p.getOrder(args)).isEqualTo('v');
+        assertThat(p.getOrder(args)).isEqualTo('d');
     }
 
 }
