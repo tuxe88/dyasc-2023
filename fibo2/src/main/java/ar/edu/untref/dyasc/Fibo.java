@@ -1,7 +1,5 @@
 package ar.edu.untref.dyasc;
 
-import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
 public class Fibo {
@@ -12,7 +10,7 @@ public class Fibo {
     Sorter sorter;
     String[] input;
 
-    public Fibo(Validator validator,Parser parser, Printer printer, Sorter sorter, String[] args){
+    public Fibo(Validator validator, Parser parser, Printer printer, Sorter sorter, String[] args) {
         this.validator = validator;
         this.parser = parser;
         this.printer = printer;
@@ -20,10 +18,10 @@ public class Fibo {
         this.input = args;
     }
 
-    public void execute(){
+    public void execute() {
 
         //valido el input
-        if(!validator.isInputValid(this.input)){
+        if (!validator.isInputValid(this.input)) {
             System.out.println("Opciones no validas");
             return;
         }

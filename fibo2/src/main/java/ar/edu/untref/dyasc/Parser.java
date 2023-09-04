@@ -22,7 +22,7 @@ public class Parser {
     }
 
     public int getFiboNumber(String[] input) {
-        return input.length == 1 ? Integer.parseInt(input[0]) :Integer.parseInt( input[1]);
+        return input.length == 1 ? Integer.parseInt(input[0]) : Integer.parseInt(input[1]);
     }
 
     public char getOrder(String[] input) {

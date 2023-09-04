@@ -1,7 +1,4 @@
 package ar.edu.untref.dyasc;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
 
 public class Ejecutable {
 
@@ -10,7 +7,7 @@ public class Ejecutable {
         Parser p = new Parser();
         Printer pr = new Printer();
         Sorter s = new Sorter();
-        Fibo f = new Fibo(v,p,pr,s,args);
+        Fibo f = new Fibo(v, p, pr, s, args);
         f.execute();
     }
 }
