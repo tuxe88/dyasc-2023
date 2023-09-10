@@ -11,6 +11,7 @@ public class Parser {
     private char order;
     private String file;
     private char modo;
+    private int fiboSum;
     final List<String> fiboList;
 
     public Parser(String[] args) {
@@ -20,6 +21,7 @@ public class Parser {
         this.file = null;
         this.modo = 0;
         this.fiboNumber = -1;
+        this.fiboSum = 0;
 
         this.args = args;
         for (String s : args) {
@@ -40,26 +42,34 @@ public class Parser {
             }
         }
 
+        if(orientation==0){
+            orientation = 'h';
+            order = 'd';
+        }
+
         this.fiboList = new LinkedList<>();
         int primero = 0;
         int segundo = 1;
 
         for (int i = 1; i <= this.fiboNumber; ++i) {
             this.fiboList.add(String.valueOf(primero));
+            this.fiboSum = this.fiboSum + primero;
             int siguiente = primero + segundo;
             primero = segundo;
             segundo = siguiente;
         }
+
     }
 
     public boolean isInputValid(){
 
-        if (
-                this.fiboNumber == -1 ||
-                (this.order != 'i' && this.order != 'd') || (this.orientation != 'v' && this.orientation != 'h') ||
-                this.file == null
-        ) return false;
+        if(this.fiboNumber == -1){
+            return false;
+        }
 
+        if(orientation!=0 && order!=0){
+            if ((this.order != 'i' && this.order != 'd') || (this.orientation != 'v' && this.orientation != 'h')) return false;
+        }
 
         return true;
     }
@@ -84,7 +94,11 @@ public class Parser {
         return this.file;
     }
 
-    public char modo() {
+    public char getModo() {
         return this.modo;
+    }
+
+    public int getFiboSum(){
+        return this.fiboSum;
     }
 }

@@ -6,7 +6,8 @@ public class Ejecutable {
         Parser p = new Parser(args);
         Printer pr = new Printer();
         Sorter s = new Sorter();
-        Fibo f = new Fibo(p, pr, s, args);
+        FileManager fm = new FileManager();
+        Fibo f = new Fibo(p, pr, s, fm,args);
         f.execute();
     }
 }

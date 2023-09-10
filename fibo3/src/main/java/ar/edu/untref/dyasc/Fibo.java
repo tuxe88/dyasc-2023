@@ -1,5 +1,6 @@
 package ar.edu.untref.dyasc;
 
+import java.io.IOException;
 import java.util.List;
 
 public class Fibo {
@@ -7,12 +8,14 @@ public class Fibo {
     Parser parser;
     Printer printer;
     Sorter sorter;
+    FileManager fileManager;
     String[] input;
 
-    public Fibo(Parser parser, Printer printer, Sorter sorter, String[] args) {
+    public Fibo(Parser parser, Printer printer, Sorter sorter, FileManager fileManager, String[] args) {
         this.parser = parser;
         this.printer = printer;
         this.sorter = sorter;
+        this.fileManager = fileManager;
         this.input = args;
     }
 
@@ -20,7 +23,7 @@ public class Fibo {
 
         //valido el input
         if (!parser.isInputValid()) {
-            System.out.println("Opciones no validas");
+            System.out.print("Opciones no validas.");
             return;
         }
 
@@ -29,12 +32,25 @@ public class Fibo {
         List<String> fiboList = parser.getFiboList();
         char order = parser.getOrder();
         char orientation = parser.getOrientation();
+        String fileName = parser.getFile();
+        char modo = parser.getModo();
+        int fiboSum = parser.getFiboSum();
 
         //con el sorter ordeno la lista dependiendo de lo que me pidan
         sorter.order(order, fiboList);
 
-        //con el printer imprimo
-        printer.print(orientation, fibo, fiboList);
+        //si se mando un filename, imprimo el archivo
+        if(fileName!=null){
+            try {
+                this.fileManager.write(fileName,printer.getOutput(orientation, fibo, fiboList,fiboSum));
+            } catch (IOException e) {
+                System.out.println("Ocurrió un error escribiendo el archivo "+ fileName+"\n: "+e.getMessage());
+            }
+
+            System.out.println("fibo<" + fibo + "> guardado en "+fileName);
+        }else{//si no lo imprimo en cosola
+            printer.print(orientation, fibo, fiboList,modo,fiboSum);
+        }
 
     }
 
