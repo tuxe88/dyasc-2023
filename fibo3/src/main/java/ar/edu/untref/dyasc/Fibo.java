@@ -42,12 +42,11 @@ public class Fibo {
         //si se mando un filename, imprimo el archivo
         if(fileName!=null){
             try {
-                this.fileManager.write(fileName,printer.getOutput(orientation, fibo, fiboList,fiboSum));
+                this.fileManager.write(fileName,printer.getOutput(orientation, fibo, fiboList,modo,fiboSum));
             } catch (IOException e) {
                 System.out.println("Ocurrió un error escribiendo el archivo "+ fileName+"\n: "+e.getMessage());
             }
-
-            System.out.println("fibo<" + fibo + "> guardado en "+fileName);
+            System.out.print("fibo<" + fibo + "> guardado en "+fileName);
         }else{//si no lo imprimo en cosola
             printer.print(orientation, fibo, fiboList,modo,fiboSum);
         }

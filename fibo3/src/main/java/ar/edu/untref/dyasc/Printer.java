@@ -7,7 +7,12 @@ public class Printer {
     public void print(char orientation, int fibo, List<String> fiboList,char modo,int fiboSum) {
 
         if(modo=='s'){
-            System.out.print("fibo<" + fibo + ">s: "+fiboSum);
+            if(orientation=='h'){
+                System.out.print("fibo<" + fibo + ">s: "+fiboSum);
+            }else {
+                System.out.print("fibo<" + fibo + ">s: \n"+fiboSum);
+            }
+
         }else{
             if (orientation == 'h') {
                 System.out.print("fibo<" + fibo + ">:");
@@ -23,18 +28,27 @@ public class Printer {
         }
     }
 
-    public String getOutput(char orientation, int fibo, List<String> fiboList,int fiboSum) {
+    public String getOutput(char orientation, int fibo, List<String> fiboList,int modo,int fiboSum) {
         String output = "";
 
-        if (orientation == 'h') {
-            output = output.concat("fibo<" + fibo + ">: ");
-            for (int i = 0; i < fiboList.size(); ++i) {
-                output = output.concat(fiboList.get(i) + " ");
+        if(modo=='s'){
+            if(orientation=='h'){
+                output = output.concat("fibo<" + fibo + ">s: "+fiboSum);
+            }else{
+                output = output.concat("fibo<" + fibo + ">s: \n"+fiboSum);
             }
-        } else {
-            output = output.concat("fibo<" + fibo + ">: \n");
-            for (int i = 0; i < fiboList.size(); ++i) {
-                output = output.concat(fiboList.get(i)+"\n");
+
+        }else {
+            if (orientation == 'h') {
+                output = output.concat("fibo<" + fibo + ">: ");
+                for (int i = 0; i < fiboList.size(); ++i) {
+                    output = output.concat(fiboList.get(i) + " ");
+                }
+            } else {
+                output = output.concat("fibo<" + fibo + ">:");
+                for (int i = 0; i < fiboList.size(); ++i) {
+                    output = output.concat("\n"+fiboList.get(i));
+                }
             }
         }
 
