@@ -11,30 +11,31 @@ public class Parser {
     private char order;
     private String file;
     private char modo;
-    private List<String> fiboList;
+    final List<String> fiboList;
 
-    public Parser(String[] args){
+    public Parser(String[] args) {
 
         this.order = 0;
         this.orientation = 0;
         this.file = null;
         this.modo = 0;
+        this.fiboNumber = -1;
 
         this.args = args;
         for (String s : args) {
-            if(s.contains("-o=")){
+            if (s.contains("-o=")) {
                 this.order = s.charAt(4);
                 this.orientation = s.charAt(3);
             }
-            if(s.contains("-f=")){
+            if (s.contains("-f=")) {
                 this.file = s.substring(3);
             }
-            if(s.contains("-m=")){
+            if (s.contains("-m=")) {
                 this.modo = s.charAt(3);
             }
-            try{
+            try {
                 this.fiboNumber = Integer.parseInt(s);
-            }catch (Exception e){
+            } catch (Exception e) {
                 //System.out.println(e);
             }
         }
@@ -44,16 +45,23 @@ public class Parser {
         int segundo = 1;
 
         for (int i = 1; i <= this.fiboNumber; ++i) {
-
             this.fiboList.add(String.valueOf(primero));
             int siguiente = primero + segundo;
             primero = segundo;
             segundo = siguiente;
         }
+    }
+
+    public boolean isInputValid(){
+
+        if (
+                this.fiboNumber == -1 ||
+                (this.order != 'i' && this.order != 'd') || (this.orientation != 'v' && this.orientation != 'h') ||
+                this.file == null
+        ) return false;
 
 
-
-
+        return true;
     }
 
     public List<String> getFiboList() {
@@ -72,11 +80,11 @@ public class Parser {
         return this.orientation;
     }
 
-    public String getFile(){
-        return  this.file;
+    public String getFile() {
+        return this.file;
     }
 
-    public char modo(){
-        return  this.modo;
+    public char modo() {
+        return this.modo;
     }
 }

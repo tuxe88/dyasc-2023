@@ -25,4 +25,11 @@ public class ParserTest {
         assertThat(p.getOrder()).isEqualTo('d');
     }
 
+    @Test
+    public void getFileName(){
+        String[] args = {"-o=vd","-f=salida.txt", "5"};
+        Parser p = new Parser(args);
+        assertThat(p.getFile()).isEqualTo("salida.txt");
+    }
+
 }

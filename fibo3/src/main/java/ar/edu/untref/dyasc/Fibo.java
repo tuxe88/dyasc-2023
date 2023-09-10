@@ -4,14 +4,12 @@ import java.util.List;
 
 public class Fibo {
 
-    Validator validator;
     Parser parser;
     Printer printer;
     Sorter sorter;
     String[] input;
 
-    public Fibo(Validator validator, Parser parser, Printer printer, Sorter sorter, String[] args) {
-        this.validator = validator;
+    public Fibo(Parser parser, Printer printer, Sorter sorter, String[] args) {
         this.parser = parser;
         this.printer = printer;
         this.sorter = sorter;
@@ -21,7 +19,7 @@ public class Fibo {
     public void execute() {
 
         //valido el input
-        if (!validator.isInputValid(this.input)) {
+        if (!parser.isInputValid()) {
             System.out.println("Opciones no validas");
             return;
         }
